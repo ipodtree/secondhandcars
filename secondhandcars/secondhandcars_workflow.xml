@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="workflow" id="wkf_secondhandcars">
+            <field name="name">secondhandcars.wkf</field>
+            <field name="osv">secondhandcars.car</field>
+            <field name="on_create">True</field>
+        </record>
+
+        <record model="workflow.activity" id="act_draft">
+            <field name="wkf_id" ref="wkf_secondhandcars" />
+            <field name="flow_start">True</field>
+            <field name="name">draft</field>
+            <field name="kind">function</field>
+            <field name="action">car_draft()</field>
+        </record>
+
+        <record model="workflow.activity" id="act_repair">
+            <field name="wkf_id" ref="wkf_secondhandcars" />
+            <field name="name">repair</field>
+            <field name="kind">function</field>
+            <field name="action">car_repair()</field>
+        </record>
+
+        <record model="workflow.activity" id="act_ready">
+            <field name="wkf_id" ref="wkf_secondhandcars" />
+            <field name="name">ready</field>
+            <field name="kind">function</field>
+            <field name="action">car_ready()</field>
+        </record>
+
+        <record model="workflow.activity" id="act_sold">
+            <field name="wkf_id" ref="wkf_secondhandcars" />
+            <field name="name">sold</field>
+            <field name="kind">function</field>
+            <field name="action">car_sold()</field>
+            <field name="flow_stop">True</field>
+        </record>
+
+        <record model="workflow.activity" id="act_cancel">
+            <field name="wkf_id" ref="wkf_secondhandcars" />
+            <field name="name">cancel</field>
+            <field name="kind">function</field>
+            <field name="action">car_cancel()</field>
+            <field name="flow_stop">True</field>
+        </record>
+
+        <record model="workflow.transition" id="t1">
+            <field name="act_from" ref="act_draft" />
+            <field name="act_to" ref="act_repair" />
+            <field name="signal">car_repair</field>
+        </record>
+
+        <record model="workflow.transition" id="t2">
+            <field name="act_from" ref="act_repair" />
+            <field name="act_to" ref="act_ready" />
+            <field name="signal">car_ready</field>
+        </record>
+
+ 	<record model="workflow.transition" id="t3">
+            <field name="act_from" ref="act_ready" />
+            <field name="act_to" ref="act_sold" />
+            <field name="signal">car_sold</field>
+        </record>
+
+        <record model="workflow.transition" id="t4">
+            <field name="act_from" ref="act_ready" />
+            <field name="act_to" ref="act_cancel" />
+            <field name="signal">car_cancel</field>
+        </record>
+
+    </data>
+</openerp>

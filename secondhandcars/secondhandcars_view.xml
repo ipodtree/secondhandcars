@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<openerp>
+  <data>
+
+    <!-- Brand: brand Form View -->
+    <record model="ir.ui.view" id="view_secondhandcars_brand_form">
+      <field name="name">secondhandcars.brand.form</field>
+      <field name="model">secondhandcars.brand</field>
+      <field name="arch" type="xml">
+	<form string="Brands of cars" version="7.0">
+	  <label for="name"/>
+	  <field name="name"/>
+	  <label for="international url"/>
+	  <field name="international url" widget="url"/>
+	  <label for="local url"/>
+	  <field name="local url" widget="url"/>
+	  <label for="brandmodel url"/>
+	  <field name="brandmodel url" widget="url"/>
+	</form>
+      </field>
+    </record>
+
+    <!-- Brand: brand Tree View -->
+    <record model="ir.ui.view" id="view_secondhandcars_brand_tree">
+      <field name="name">secondhandcars.brand.tree</field>
+      <field name="model">secondhandcars.brand</field>
+      <field name="field_parent"></field>
+      <field name="arch" type="xml">
+	<tree string="Brands of cars">
+	  <field name="name"/> 
+	  <field name="international url" widget="url"/>
+	  <field name="local url" widget="url"/>
+	  <field name="brandmodel url" widget="url"/>
+	</tree>
+      </field>
+    </record>
+
+    <!-- Brand:brand Action -->
+    <record model="ir.actions.act_window" id="action_secondhandcars_brand">
+      <field name="name">Brands</field>
+      <field name="res_model">secondhandcars.brand</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Model: model Form View -->
+    <record model="ir.ui.view" id="view_secondhandcars_model_form">
+      <field name="name">secondhandcars.model.form</field>
+      <field name="model">secondhandcars.model</field>
+      <field name="arch" type="xml">
+	<form string="Models of cars" version="7.0">
+	  <label for="name"/>
+	  <field name="name"/>
+          <label for="brand_id"/>
+	  <field name="brand_id"/>
+	  <label for="last_year"/>
+	  <field name="last_year"/>
+	</form>
+      </field>
+    </record>
+
+    <!-- Model: model Tree View -->
+    <record model="ir.ui.view" id="view_secondhandcars_model_tree">
+      <field name="name">secondhandcars.model.tree</field>
+      <field name="model">secondhandcars.model</field>
+      <field name="field_parent"></field>
+      <field name="arch" type="xml">
+	<tree string="Models of cars">
+	  <field name="name"/>
+	  <field name="brand_id"/>
+	  <field name="last_year"/>
+	</tree>
+      </field>
+    </record>
+
+   <!-- Model: model Action -->
+    <record model="ir.actions.act_window" id="action_secondhandcars_model">
+      <field name="name">Models</field>
+      <field name="res_model">secondhandcars.model</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+ <!-- Model:car Form View -->
+    <record model="ir.ui.view" id="view_secondhandcars_car_form">
+      <field name="name">secondhandcars.car.form</field>
+      <field name="model">secondhandcars.car</field>
+      <field name="arch" type="xml">
+	<form string="Lists of cars" version="7.0">
+ 		<header>
+                    <button name="car_repair" string="Start repair" states="draft" class="oe_highlight"/>
+		    <button name="car_ready" string="Complete repair" states="repair" class="oe_highlight"/>
+                    <button name="car_sold" string="Sell" states="ready" class="oe_highlight"/>
+                    <button name="car_cancel" string="Store" states="ready"  class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,repair,ready,sold"/>
+                </header>
+          <label for="immatriculation"/>
+	  <field name="immatriculation"/>
+	  <label for="model_ids"/>
+	  <field name="model_ids"/>
+	  <label for="km_in"/>
+	  <field name="km_in"/>
+          <label for="km_out"/>
+	  <field name="km_out"/>
+          <label for="price"/>
+          <field name="price"/>
+          <label for="doors"/>
+          <field name="doors"/>
+	  <label for="seats"/>
+          <field name="seats"/>
+          <label for="energy"/>
+          <field name="energy"/>
+	</form>
+      </field>
+    </record>
+
+    <!-- Model:car Tree View -->
+    <record model="ir.ui.view" id="view_secondhandcars_car_tree">
+      <field name="name">secondhandcars.car.tree</field>
+      <field name="model">secondhandcars.car</field>
+      <field name="field_parent"></field>
+      <field name="arch" type="xml">
+	<tree string="Lists of cars" colors="blue:state == 'draft';black:state in ('repair','ready','sold');gray:state == 'cancel'" >
+	  
+	  <field name="create_uid"/>
+         
+	  <field name="immatriculation"/>
+	 
+	  <field name="model_ids"/>
+	 		
+	  <field name="km_in"/>
+
+	  <field name="km_out"/>
+          
+          <field name="price"/>
+     
+          <field name="doors"/>
+	  
+          <field name="seats"/>
+          
+          <field name="energy"/>
+
+	  <field name="state"/>
+
+	  <field name="date_draft"/>
+
+	  <field name="date_repaired"/>
+
+	  <field name="date_sold"/>
+
+          <field name="date_cancel"/>
+
+		
+	</tree>
+      </field>
+    </record>
+
+ <!-- Model:car Search View -->
+     <record model="ir.ui.view" id="view_secondhandcars_car_search">
+        <field name="name">secondhandcars.car.search</field>
+        <field name="model">secondhandcars.car</field>
+        <field name="arch" type="xml">
+            <search string="Cars">
+                <field name="immatriculation" string="Lists of cars"/>
+                <filter icon="terp-document-new" string="lt 10km" domain="[('km_in','&lt;', '10')]" help="Km in less than 10km"/>
+                <filter icon="terp-camera_test" string="lt 100km" domain="[('km_in','&lt;', '100')]" help="Km in less than 100km"/>
+                <filter icon="terp-check" string="mt 100km" domain="[('km_in','&gt;','100')]" help="Km in more than 100km" />
+
+		<filter icon="terp-check" string="to be controlled" domain="[('state','=','draft')]" help="to be controlled" />
+		<filter icon="terp-check" string="to be repaired" domain="[('state','=','repair')]" help="in repair" />
+		<filter icon="terp-check" string="to be sold" domain="[('state','=','ready')]" help="complete repair, to be sold" />
+
+		<field name="model_ids"/>
+		<group expand="0" string="Group By...">
+                    <filter icon="terp-model" string="Model" help="By Model Type" context="{'group_by':'model_ids'}"/>
+                    <filter icon="terp-energy" string="Energy" help="By Energy Type" context="{'group_by':'energy'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+   <!-- Model: car Action -->
+    <record model="ir.actions.act_window" id="action_secondhandcars_car">
+      <field name="name">Cars</field>
+      <field name="res_model">secondhandcars.car</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="search_view_id" ref="view_secondhandcars_car_search"></field>
+    </record>
+
+    <!-- Top menu item -->
+    <menuitem name="Second Hand Cars" id="base.menu_secondhandcars_root" sequence="120" groups="base.group_user"/>
+
+    <!-- Menu sections -->
+    <menuitem name="Configuration" id="menu_secondhandcars_configuration" parent="base.menu_secondhandcars_root" sequence="3"/>
+
+    <!-- Menu items -->
+    <menuitem name="Brands" id="menu_brand" parent="menu_secondhandcars_configuration" action="action_secondhandcars_brand" sequence="1"/>
+    <menuitem name="Models" id="menu_model" parent="menu_secondhandcars_configuration" action="action_secondhandcars_model" sequence="1"/>
+    <menuitem name="Cars"   id="menu_car"   parent="menu_secondhandcars_configuration" action="action_secondhandcars_car" sequence="1"/>
+
+  </data>
+</openerp>

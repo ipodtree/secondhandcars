@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record model="secondhandcars.brand" id="secondhandcars_brand_peugeot">
+            <field name="name">Peugeot</field>
+	    <field name="international url">www.peugeot.com/en</field>
+	    <field name="local url">www.peugeot.com/fr</field>
+	    <field name="brandmodel url">www.peugeot.com/fr</field>
+        </record>
+
+        <record model="secondhandcars.brand" id="secondhandcars_brand_renault">
+            <field name="name">Renault</field>
+	    <field name="international url">group.renault.com</field>
+	    <field name="local url">www.renault.fr</field>
+	    <field name="brandmodel url">www.renault.fr</field>
+        </record>
+
+        <record id="base.user_demo" model="res.users">
+            <field name="groups_id" eval="[(4,ref('base.group_user'))]"/>
+        </record>
+
+    </data>
+</openerp>
+
